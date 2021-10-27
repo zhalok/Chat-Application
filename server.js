@@ -3,8 +3,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const exp = require('constants');
+
 const notFoundhandler = require('./middlewares/notFoundHandler');
+const loginRoute = require('./routes/loginRoute');
+const userRoute = require('./routes/user');
 
 const app = express();
 dotenv.config();
@@ -27,14 +29,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-app.all('/', notFoundhandler);
+app.use('/login', loginRoute);
+app.use('/user', userRoute);
+
+app.use(notFoundhandler);
 
 app.use((err, req, res, next) => {
-	console.log(err);
-	res.render('error', {
-		bodyText: 'there was an error',
-		title: 'Error Page',
-	});
+	res.locals.error = err;
+	res.locals.title = 'Error Page';
+
+	res.render('error');
 });
 
 app.listen(process.env.PORT, () => {

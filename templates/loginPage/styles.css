@@ -1,0 +1,24 @@
+.loginBlock {
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	padding: 20px;
+	background-color: rgb(77, 158, 230);
+}
+
+.imageBlock {
+	display: flex;
+	width: fit-content;
+	width: 50%;
+	margin-left: auto;
+}
+
+.formBlock {
+	display: flex;
+	width: fit-content;
+	margin-left: auto;
+	width: 50%;
+}
