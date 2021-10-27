@@ -6,7 +6,8 @@ const cookieParser = require('cookie-parser');
 
 const notFoundhandler = require('./middlewares/notFoundHandler');
 const loginRoute = require('./routes/loginRoute');
-const userRoute = require('./routes/user');
+const userRoute = require('./routes/userRoute');
+const inboxRoute = require('./routes/inboxRoute');
 
 const app = express();
 dotenv.config();
@@ -29,8 +30,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
+app.get('/', loginRoute);
 app.use('/login', loginRoute);
-app.use('/user', userRoute);
+app.use('/users', userRoute);
+app.use('/inbox', inboxRoute);
 
 app.use(notFoundhandler);
 

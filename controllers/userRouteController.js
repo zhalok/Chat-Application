@@ -1,6 +1,6 @@
 const showUserInfo = (req, res, next) => {
-	console.log(req.body);
-	res.render('userPage');
+	res.locals.title = 'users';
+	res.render('users');
 };
 
 module.exports = {
